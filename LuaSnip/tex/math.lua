@@ -77,4 +77,6 @@ return {
     s({ trig = ";Q", name = "Psi capital", snippetType = "autosnippet" }, t("\\Psi"), { condition = in_math }),
     s({ trig = ";C", name = "Chi capital", snippetType = "autosnippet" }, t("X"), { condition = in_math }),
     s({ trig = ";O", name = "Omega capital", snippetType = "autosnippet" }, t("\\Omega"), { condition = in_math }),
+
+    s({ trig = "...", name = "Low dots", snippetType = "autosnippet" }, t("\\ldots"), { condition = in_math }),
 }

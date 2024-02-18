@@ -19,7 +19,6 @@ return {
                 \begin{align*}
                     <>
                 \end{align*}
-
             ]],
             { i(1) }
         ),
@@ -32,7 +31,6 @@ return {
                 \begin{<>}
                     <>
                 \end{<>}
-
             ]],
             {
                 i(1),
@@ -40,6 +38,90 @@ return {
                 rep(1),
             }
         ),
+        { condition = line_begin }
+    ),
+    s(
+        { trig = "fig", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{figure}[<>]
+                    \centering
+                    \includegraphics[width=<>\textwidth]{<>}
+                    \caption{<>}
+                    \label{fig:<>}
+                \end{figure}
+            ]],
+            {
+                i(1, "htpb"),
+                i(2),
+                i(3),
+                i(4, "Caption"),
+                i(5, "label"),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    s(
+        { trig = "table", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{table}[<>]
+                    \centering
+                    \caption{<>}
+                    \label{tab:<>}
+                    \begin{tabular}{<>} \toprule
+                        <> \\
+                        \midrule
+                        <>
+                        \bottomrule \\
+                    \end{tabular}
+                \end{table}
+            ]],
+            {
+                i(1, "htpb"),
+                i(2, "Caption"),
+                i(3, "label"),
+                i(5, "lcr"),
+                i(4),
+                i(6),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    s(
+        { trig = "enum", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{enumerate}
+                    \item <>
+                \end{enumerate}
+            ]],
+            {
+                i(1),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    s(
+        { trig = "item", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{itemize}
+                    \item <>
+                \end{itemize}
+            ]],
+            {
+                i(1),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    s(
+        { trig = "pac", snippetType = "autosnippet" },
+        fmta([[\usepackage<>{<>}]], {
+            i(1, "[options]"),
+            i(2, "package"),
+        }),
         { condition = line_begin }
     ),
 }
