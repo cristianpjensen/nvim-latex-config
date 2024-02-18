@@ -31,7 +31,7 @@ return {
                 },
                 -- ordered by priority
                 sources = cmp.config.sources({
-                    { name = "luasnip", option = { show_autosnippets = true } },
+                    { name = "luasnip" },
                     { name = "nvim_lsp", keyword_length = 1 },
                     { name = "nvim_lsp_signature_help" },
                     { name = "path" },
