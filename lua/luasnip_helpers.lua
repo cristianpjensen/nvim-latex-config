@@ -1,5 +1,17 @@
 local M = {}
 
+function M.pipe(fns)
+    return function(...)
+        for _, fn in ipairs(fns) do
+            if not fn(...) then
+                return false
+            end
+        end
+
+        return true
+    end
+end
+
 local MATH_NODES = {
     displayed_equation = true,
     inline_formula = true,
@@ -75,6 +87,10 @@ function M.get_visual(args, parent)
     else -- If LS_SELECT_RAW is empty, return a blank insert node
         return sn(nil, i(1))
     end
+end
+
+function M.no_backslash(line_to_cursor, matched_trigger)
+    return not line_to_cursor:find("\\%a+$", -#line_to_cursor)
 end
 
 return M

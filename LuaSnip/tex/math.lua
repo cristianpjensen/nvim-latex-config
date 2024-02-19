@@ -9,6 +9,8 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local helpers = require("luasnip_helpers")
+local pipe = helpers.pipe
+local no_backslash = helpers.no_backslash
 local in_math = helpers.in_math
 local in_text = helpers.in_text
 local get_visual = helpers.get_visual
@@ -151,7 +153,24 @@ return {
         { condition = in_math }
     ),
 
-    -- Equality by definition
+    s(
+        { trig = "//", name = "Fraction", snippetType = "autosnippet" },
+        fmta("\\frac{<>}{<>}", {
+            d(1, get_visual),
+            i(2),
+        }),
+        { condition = in_math }
+    ),
+
+    s(
+        { trig = "n//", name = "Nice fraction", snippetType = "autosnippet" },
+        fmta("\\nicefrac{<>}{<>}", {
+            d(1, get_visual),
+            i(2),
+        }),
+        { condition = in_math }
+    ),
+
     s(
         { trig = ":=", name = "Equality by definition", snippetType = "autosnippet" },
         t("\\doteq"),
@@ -159,4 +178,97 @@ return {
     ),
 
     s({ trig = "...", name = "Low dots", snippetType = "autosnippet" }, t("\\ldots"), { condition = in_math }),
+
+    s(
+        { trig = "!=", name = "Not equal", wordTrig = false, snippetType = "autosnippet" },
+        t("\\neq"),
+        { condition = in_math }
+    ),
+    s(
+        { trig = ">=", name = "Greater or equal", wordTrig = false, snippetType = "autosnippet" },
+        t("\\geq"),
+        { condition = in_math }
+    ),
+    s(
+        { trig = "<=", name = "Less or equal", wordTrig = false, snippetType = "autosnippet" },
+        t("\\leq"),
+        { condition = in_math }
+    ),
+    s({ trig = "~~", name = "~", wordTrig = false, snippetType = "autosnippet" }, t("\\sim"), { condition = in_math }),
+    s(
+        { trig = "==", name = "In align env", wordTrig = false, snippetType = "autosnippet" },
+        fmta("&= <> \\\\", i(1)),
+        { condition = in_math }
+    ),
+
+    s(
+        { trig = "inf", name = "Infinity", wordTrig = false, snippetType = "autosnippet" },
+        t("\\infty"),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+    s(
+        { trig = "inn", name = "In set", wordTrig = false, snippetType = "autosnippet" },
+        t("\\in"),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+
+    s(
+        { trig = "hat", name = "Hat", wordTrig = false, snippetType = "autosnippet" },
+        fmta("\\hat{<>}", d(1, get_visual)),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+    s(
+        { trig = "bar", name = "Bar", wordTrig = false, snippetType = "autosnippet" },
+        fmta("\\overline{<>}", d(1, get_visual)),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+    s(
+        { trig = "sq", name = "Square root", wordTrig = false, snippetType = "autosnippet" },
+        fmta("\\sqrt{<>}", d(1, get_visual)),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+
+    s(
+        { trig = "set", name = "Set" },
+        fmta("\\{ <> \\}", d(1, get_visual)),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+
+    -- Matrices
+    s(
+        { trig = "bmat", name = "Brackets matrix" },
+        fmta("\\begin{bmatrix} <> \\end{bmatrix}", i(1)),
+        { condition = in_math }
+    ),
+
+    s(
+        { trig = "pmat", name = "Parentheses matrix" },
+        fmta("\\begin{pmatrix} <> \\end{pmatrix}", i(1)),
+        { condition = in_math }
+    ),
+
+    -- Iterators
+    s(
+        { trig = "sum", name = "Sum" },
+        fmta("\\sum_{<>}^{<>} <>", { i(1, "n=1"), i(2, "N"), i(3) }),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+    s(
+        { trig = "prod", name = "Product" },
+        fmta("\\prod_{<>}^{<>} <>", { i(1, "n=1"), i(2, "N"), i(3) }),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+
+    -- Limit
+    s(
+        { trig = "lim", name = "Limit" },
+        fmta("\\lim_{<> \\to <>} <>", { i(1, "n"), i(2, "\\infty"), i(3) }),
+        { condition = pipe({ in_math, no_backslash }) }
+    ),
+
+    s(
+        { trig = "seq", name = "Sequence" },
+        fmta("<>, \\ldots, <>", { i(1, "x_1"), i(2, "x_N") }),
+        { condition = in_math }
+    ),
 }
