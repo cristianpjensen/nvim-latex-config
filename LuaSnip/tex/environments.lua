@@ -11,6 +11,9 @@ local rep = require("luasnip.extras").rep
 
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
+local helpers = require("luasnip_helpers")
+local in_text = helpers.in_text
+
 return {
     s(
         { trig = "ali", dscr = "Align equations", snippetType = "autosnippet" },
@@ -22,7 +25,7 @@ return {
             ]],
             { i(1) }
         ),
-        { condition = line_begin }
+        { condition = line_begin * in_text }
     ),
     s(
         { trig = "beg", snippetType = "autosnippet" },
@@ -59,7 +62,7 @@ return {
                 i(5, "label"),
             }
         ),
-        { condition = line_begin }
+        { condition = line_begin * in_text }
     ),
     s(
         { trig = "table", snippetType = "autosnippet" },
@@ -86,7 +89,7 @@ return {
                 i(6),
             }
         ),
-        { condition = line_begin }
+        { condition = line_begin * in_text }
     ),
     s(
         { trig = "enum", snippetType = "autosnippet" },
@@ -100,7 +103,7 @@ return {
                 i(1),
             }
         ),
-        { condition = line_begin }
+        { condition = line_begin * in_text }
     ),
     s(
         { trig = "item", snippetType = "autosnippet" },
@@ -114,7 +117,7 @@ return {
                 i(1),
             }
         ),
-        { condition = line_begin }
+        { condition = line_begin * in_text }
     ),
     s(
         { trig = "pac", snippetType = "autosnippet" },
