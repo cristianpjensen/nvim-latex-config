@@ -19,8 +19,8 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             python = { "isort", "black" },
-            tex = { "latexindent" },
-            bib = { "latexindent" },
+            tex = { "latexindent -m" },
+            bib = { "latexindent -m" },
         },
         -- Format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
